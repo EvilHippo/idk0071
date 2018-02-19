@@ -1,0 +1,166 @@
+* {
+  color: #d5efd9;
+  font-size: 100%;
+  font-family: Helvetica, Arial;
+  font-size: 20px;
+}
+
+html{
+  min-height:100%;
+  position:relative;
+}
+body{
+  height:100%;
+  background-color: #484848;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+  /* For title*/
+  h1.main {
+    color: black;
+    font-size: 90px;
+    text-align: center;
+    margin:0px;
+    padding:0px;
+  }
+  p.call1 {
+    font-size: 50px;
+    text-align: center;
+    margin:15px;
+    padding:0px;
+  }
+  p.call2 {
+    font-size: 40px;
+    text-align: center;
+    margin:0px;
+    padding:0px;
+  }
+
+  .middleBox{/* middle contains back contains mains*/
+    width: 840px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #7584ad;
+  //position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:hidden;
+    z-index:-1;
+    text-align: center;
+
+  }
+  div.backBox {
+    background-image: url("https://pre00.deviantart.net/36d4/th/pre/f/2015/201/e/0/a_million_fighting_darkscape_wallpaper_by_charlie_henson-d9225ip.png");
+    margin-top: 65px;
+    margin-bottom: 65px;
+    height: 100%;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  div.mainBox {
+    background-color: #0a0a2a;
+    width: 750px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    box-shadow: 7px 7px 3px #07071e;
+    text-align: center;
+  }
+  div.testBox {
+
+    background-color: #b3b3b3;
+    width: 750px;
+    height: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: middle;
+  }
+
+  table{
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+
+    /*
+        width:90vw;
+        height:90vw;
+        */
+    width: 100%;
+    height: 100%;
+  }
+  /* For mainBox*/
+  h1.section {
+    font-size: 25px;
+    text-align: center;
+    margin:0px;
+    padding:0px;
+  }
+
+/* For configuration */
+button {
+  margin: 10px;
+  width: 160px;
+  background: #f97779;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#f97779), to(#ce2424));
+  background: -moz-linear-gradient(#f97779, #ce2424);
+  background: linear-gradient(#f97779, #ce2424);
+  border: solid 1px #be2424;
+  border-bottom: solid 3px #bd2524;
+  box-shadow: inset 0 0 0 1px #e67e7b;
+  color: #fff;
+  text-shadow: 0 1px 0 #bd2524;
+}
+
+form {
+  margin: 10px;
+}
+span.form {
+  font-size: 20px;
+  margin: 10px;
+}
+input.field {
+  width: 80px;
+  margin: 10px;
+}
+/* For game */
+
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td.clicked {
+  background-color: green;
+}
+
+.greenBox {
+  color: #101010;
+  background-color: green;
+}
+
+.redBox {
+  color: #101010;
+  background-color: red;
+}
+
+.ninjaText {
+  color: #b3b3b3;
+}
+
+
+
+
+
+
+
+
