@@ -1,7 +1,8 @@
 package com.spring.platform;
 
-
 public abstract class Platform {
+
+    private int id = 0;
     private double x = 0;
     private double y = 0;
 
