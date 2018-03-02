@@ -12,32 +12,40 @@ import java.sql.Statement;
 @RestController
 public class PlayerController {
 
-    @RequestMapping(value="user/start", method = RequestMethod.POST)
-    public String addPlayerToDatabase(@RequestBody String payload){
-        Player player = updateDatabaseWithJson(payload, "insert");
+    @RequestMapping(value="user/create", method = RequestMethod.POST)
+    public String addPlayerInDatabase(@RequestBody String playerInJson){
+        Player player = updateDatabaseWithJson(playerInJson, "insert");
 
-        return "Player X: " + player.getX() + " Player Y: " + player.getY() + " UID " + player.getUID();
+        return "Player X: " + player.getX() + " Player Y: " + player.getY() + " UID " + player.getUID() + " Created";
     }
     @RequestMapping(value="user/update", method = RequestMethod.POST)
-    public String updatePlayerToDatabase(@RequestBody String payload){
-        Player player = updateDatabaseWithJson(payload, "update");
+    public String updatePlayerInDatabase(@RequestBody String playerInJson){
+        Player player = updateDatabaseWithJson(playerInJson, "update");
 
-        return "Player X: " + player.getX() + " Player Y: " + player.getY() + " UID UPDATED" + player.getUID();
+        return "Player X: " + player.getX() + " Player Y: " + player.getY() + " UID UPDATED" + player.getUID() + " Updated";
+    }
+    @RequestMapping(value="user/delete", method = RequestMethod.POST)
+    public String deletePlayerInDatabase(@RequestBody String playerInJson){
+        Player player = updateDatabaseWithJson(playerInJson, "delete");
+
+        return "Player X: " + player.getX() + " Player Y: " + player.getY() + " UID " + player.getUID() + " Deleted";
     }
 
-    private Player updateDatabaseWithJson(String payload, String method) {
+    private Player updateDatabaseWithJson(String playerInJson, String method) {
         Gson gson = new Gson();
-        Player player = gson.fromJson(payload, Player.class);
+        Player player = gson.fromJson(playerInJson, Player.class);
 
         Connection connection;
         try {
 
             connection = DriverManager.getConnection("jdbc:h2:file:~/test", "sa",  "");
-            Statement st = connection.createStatement();
+            Statement SQLStatement = connection.createStatement();
             if(method.equals("update")) {
-                st.executeUpdate("UPDATE Player SET X=" + player.getX() + " ,Y=" + player.getY() + "WHERE UID=" + player.getUID());
+                SQLStatement.executeUpdate("UPDATE Player SET X=" + player.getX() + " ,Y=" + player.getY() + "WHERE UID=" + player.getUID());
             } else if(method.equals("insert")) {
-                st.executeUpdate("INSERT INTO Player VALUES(" + player.getUID() + ","  + player.getX() + "," + player.getY() + ")");
+                SQLStatement.executeUpdate("INSERT INTO Player VALUES(" + player.getUID() + ","  + player.getX() + "," + player.getY() + ")");
+            } else if(method.equals("delete")) {
+                SQLStatement.executeUpdate("DELETE Player WHERE UID=" + player.getUID());
             }
 
         } catch (SQLException e) {
