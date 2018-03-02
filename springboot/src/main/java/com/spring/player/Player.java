@@ -9,16 +9,16 @@ import javax.persistence.Table;
 @Table(name="Player")
 public class Player {
     @Id
-    @GeneratedValue
-    private String UID;
+
+    private long UID;
     private double x;
     private double y;
 
-    public String getUID() {
+    public long getUID() {
         return UID;
     }
 
-    public void setUID(String UID) {
+    public void setUID(long UID) {
         this.UID = UID;
     }
 

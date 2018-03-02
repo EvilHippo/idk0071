@@ -19,18 +19,7 @@ public class WorldController {
     int id = 0;
     @RequestMapping("/world")
     public List<Platform> getWorld() {
-        /*
-        Connection connection;
-        try {
 
-            connection = DriverManager.getConnection("jdbc:h2:file:~/test", "sa",  "");
-            Statement st = connection.createStatement();
-            st.executeUpdate("INSERT INTO SUM VALUES(" + id++ + ","  + 100 + "," + 100 + ")");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        */
 
 
         World world = new World(300, 100, 100);
