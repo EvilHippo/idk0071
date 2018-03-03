@@ -1,16 +1,16 @@
 package console.draw;
 
 import com.spring.platform.Platform;
-import com.spring.world.World;
+import com.spring.world.WorldGenerator;
 
 import java.util.List;
 
 public class ConsoleDrawMap {
 
-    public static void drawMapIntoConsole(World world) {
-        for (int y = world.getHeight() / world.PLATFORM_NUMBER_OF_PIXELS; y >= 0; y--) {
-            for (int x = 0; x < world.getWidth() / world.PLATFORM_NUMBER_OF_PIXELS; x++) {
-                if(matchPlatformCoordinates(world.getPlatforms(), x, y, world)) {
+    public static void drawMapIntoConsole(WorldGenerator worldGenerator) {
+        for (int y = worldGenerator.getHeight() / worldGenerator.PLATFORM_NUMBER_OF_PIXELS; y >= 0; y--) {
+            for (int x = 0; x < worldGenerator.getWidth() / worldGenerator.PLATFORM_NUMBER_OF_PIXELS; x++) {
+                if(matchPlatformCoordinates(worldGenerator.getWorld().getPlatforms(), x, y, worldGenerator)) {
                     System.out.print("+");
                 } else {
                     System.out.print("-");
@@ -22,9 +22,9 @@ public class ConsoleDrawMap {
 
     }
 
-    private static boolean matchPlatformCoordinates(List<Platform> platforms, int x, int y, World world) {
+    private static boolean matchPlatformCoordinates(List<Platform> platforms, int x, int y, WorldGenerator worldGenerator) {
         for (Platform platform : platforms) {
-            if (platform.getY() / world.PLATFORM_NUMBER_OF_PIXELS == y && platform.getX() / world.PLATFORM_NUMBER_OF_PIXELS == x) {
+            if (platform.getY() / worldGenerator.PLATFORM_NUMBER_OF_PIXELS == y && platform.getX() / worldGenerator.PLATFORM_NUMBER_OF_PIXELS == x) {
                 return true;
             }
         }
