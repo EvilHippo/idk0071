@@ -9,26 +9,22 @@
 
       <div class="mainBox">
 
-        <h1 class="section">
-          New game
+        <h1>
+          ${message}
         </h1>
-        <button type="button" onclick="makeField()">Play</button>
+        <button class="btn btn-create" click.trigger="playGame()">PLAY!</button>
         <p id="error"></p>
 
 
       </div>
 
-      <div class="mainBox" id="gameBox">
+      <div class="backBox" id="gameBox">
         <h1 class="section" id="chooseConfi">
           Choose a configuration to start a game
         </h1>
-        <!--
-            <div class="testBox" id="test">
-            </div>
-            -->
       </div>
 
-      <div class="mainBox">
+      <div class="backBox">
         <h1 class="section">
           Leaderboard
         </h1>

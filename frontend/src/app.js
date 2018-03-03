@@ -1,5 +1,12 @@
 export class App {
   constructor() {
-    this.message = 'Hello World!';
+    this.message = 'NEW GAME!';
+  }
+
+  playGame()
+  {
+    this.message = 'FIGHT!';
+
   }
 }
+
