@@ -4,31 +4,34 @@ import com.google.gson.Gson;
 import com.spring.player.Player;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 @RestController
 public class PlayerController {
 
     @RequestMapping(value="user/create", method = RequestMethod.POST)
-    public String addPlayerInDatabase(@RequestBody String playerInJson){
-        Player player = updateDatabaseWithJson(playerInJson, "insert");
+    public Player addPlayerInDatabase(@RequestBody String playerInJson){
 
-        return "Player X: " + player.getX() + " Player Y: " + player.getY() + " UID " + player.getUID() + " Created";
+
+        return updateDatabaseWithJson(playerInJson, "insert");
     }
     @RequestMapping(value="user/update", method = RequestMethod.POST)
-    public String updatePlayerInDatabase(@RequestBody String playerInJson){
-        Player player = updateDatabaseWithJson(playerInJson, "update");
+    public Player updatePlayerInDatabase(@RequestBody String playerInJson){
 
-        return "Player X: " + player.getX() + " Player Y: " + player.getY() + " UID UPDATED" + player.getUID() + " Updated";
+
+        return updateDatabaseWithJson(playerInJson, "update");
     }
     @RequestMapping(value="user/delete", method = RequestMethod.POST)
-    public String deletePlayerInDatabase(@RequestBody String playerInJson){
-        Player player = updateDatabaseWithJson(playerInJson, "delete");
+    public Player deletePlayerInDatabase(@RequestBody String playerInJson){
 
-        return "Player X: " + player.getX() + " Player Y: " + player.getY() + " UID " + player.getUID() + " Deleted";
+
+        return updateDatabaseWithJson(playerInJson, "delete");
+    }
+    @RequestMapping(value="user/get", method = RequestMethod.POST)
+    public Player getPlayerInDatabase(@RequestBody String playerInJson){
+
+
+        return updateDatabaseWithJson(playerInJson, "get");
     }
 
     private Player updateDatabaseWithJson(String playerInJson, String method) {
@@ -40,18 +43,36 @@ public class PlayerController {
 
             connection = DriverManager.getConnection("jdbc:h2:file:~/test", "sa",  "");
             Statement SQLStatement = connection.createStatement();
-            if(method.equals("update")) {
-                SQLStatement.executeUpdate("UPDATE Player SET X=" + player.getX() + " ,Y=" + player.getY() + "WHERE UID=" + player.getUID());
-            } else if(method.equals("insert")) {
-                SQLStatement.executeUpdate("INSERT INTO Player VALUES(" + player.getUID() + ","  + player.getX() + "," + player.getY() + ")");
-            } else if(method.equals("delete")) {
-                SQLStatement.executeUpdate("DELETE Player WHERE UID=" + player.getUID());
+            switch (method) {
+                case "update":
+                    SQLStatement.executeUpdate("UPDATE Player SET X=" + player.getX() + " ,Y=" + player.getY() + "WHERE UID=" + player.getUID());
+                    break;
+                case "insert":
+                    SQLStatement.executeUpdate("INSERT INTO Player VALUES(" + player.getUID() + "," + player.getX() + "," + player.getY() + ")");
+                    break;
+                case "delete":
+                    SQLStatement.executeUpdate("DELETE Player WHERE UID=" + player.getUID());
+                    break;
+                case "get":
+                    getPlayerByUIDFromDatabase(player, SQLStatement);
+                    break;
+                default:
+                    throw new RuntimeException("Method does not match any supported methods: update, insert, delete, get");
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return player;
+    }
+
+    private void getPlayerByUIDFromDatabase(Player player, Statement SQLStatement) throws SQLException {
+        ResultSet resultOfQuery = SQLStatement.executeQuery("Select * FROM Player WHERE UID=" + player.getUID());
+        while(resultOfQuery.next()) {
+            player.setUID(resultOfQuery.getInt(1));
+            player.setX(resultOfQuery.getInt(2));
+            player.setY(resultOfQuery.getInt(3));
+        }
     }
 
 }
