@@ -1,15 +1,16 @@
 package com.spring.player;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="Player")
 public class Player {
-    @Id
 
+    @Id @GeneratedValue(strategy= GenerationType.AUTO) @JsonIgnore
+    private long id;
+    @Column(unique = true)
     private long UID;
     private double x;
     private double y;
@@ -39,9 +40,10 @@ public class Player {
     }
 
 
-    public Player(double x, double y, String UID) {
+    public Player(double x, double y, long UID) {
 
         this.x = x;
         this.y = y;
+        this.UID = UID;
     }
 }

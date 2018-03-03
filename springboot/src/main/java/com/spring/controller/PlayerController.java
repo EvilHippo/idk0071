@@ -48,7 +48,7 @@ public class PlayerController {
                     SQLStatement.executeUpdate("UPDATE Player SET X=" + player.getX() + " ,Y=" + player.getY() + "WHERE UID=" + player.getUID());
                     break;
                 case "insert":
-                    SQLStatement.executeUpdate("INSERT INTO Player VALUES(" + player.getUID() + "," + player.getX() + "," + player.getY() + ")");
+                    SQLStatement.executeUpdate("INSERT INTO Player(UID, X, Y) VALUES(" + player.getUID() + "," + player.getX() + "," + player.getY() + ")");
                     break;
                 case "delete":
                     SQLStatement.executeUpdate("DELETE Player WHERE UID=" + player.getUID());
@@ -69,9 +69,9 @@ public class PlayerController {
     private void getPlayerByUIDFromDatabase(Player player, Statement SQLStatement) throws SQLException {
         ResultSet resultOfQuery = SQLStatement.executeQuery("Select * FROM Player WHERE UID=" + player.getUID());
         while(resultOfQuery.next()) {
-            player.setUID(resultOfQuery.getInt(1));
-            player.setX(resultOfQuery.getInt(2));
-            player.setY(resultOfQuery.getInt(3));
+            player.setUID(resultOfQuery.getInt("UID"));
+            player.setX(resultOfQuery.getInt("X"));
+            player.setY(resultOfQuery.getInt("Y"));
         }
     }
 

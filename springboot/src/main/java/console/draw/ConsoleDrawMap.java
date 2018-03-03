@@ -24,11 +24,10 @@ public class ConsoleDrawMap {
 
     private static boolean matchPlatformCoordinates(List<Platform> platforms, int x, int y, WorldGenerator worldGenerator) {
         for (Platform platform : platforms) {
-            if (platform.getY() / worldGenerator.PLATFORM_NUMBER_OF_PIXELS == y && platform.getX() / worldGenerator.PLATFORM_NUMBER_OF_PIXELS == x) {
+            if (platform.getY() / worldGenerator.PLATFORM_NUMBER_OF_PIXELS == y && (platform.getX() - worldGenerator.PLATFORM_NUMBER_OF_PIXELS * 0.5) / worldGenerator.PLATFORM_NUMBER_OF_PIXELS == x) {
                 return true;
             }
         }
         return false;
     }
 }
-
