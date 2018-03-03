@@ -82,7 +82,7 @@ public class WorldGenerator {
         int numberOfPlatforms = random.nextInt(MAXIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER) + MINIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER;
         if(platforms.isEmpty()) {
             int x = random.nextInt((int)(width * 0.6) / PLATFORM_NUMBER_OF_PIXELS) * PLATFORM_NUMBER_OF_PIXELS + (int)(width * 0.2) + (int)(PLATFORM_NUMBER_OF_PIXELS * 0.5);
-            y = random.nextInt(MAXIMUM_DISTANCE_BETWEEN_PLATFORMS) * PLATFORM_NUMBER_OF_PIXELS;
+            y = random.nextInt(MAXIMUM_DISTANCE_BETWEEN_PLATFORMS) * PLATFORM_NUMBER_OF_PIXELS + (int)(PLATFORM_NUMBER_OF_PIXELS * 0.5);
             platforms.add(new BasicPlatform(x , y));
         } else {
             addPlatformsToList(platforms, y, numberOfPlatforms);
