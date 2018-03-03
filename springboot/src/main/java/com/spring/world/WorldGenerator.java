@@ -12,7 +12,7 @@ public class WorldGenerator {
     private int width;
     private int height;
     private int numberOfPlatforms;
-    public static final int PLATFORM_NUMBER_OF_PIXELS = 10;
+    public static final int PLATFORM_NUMBER_OF_PIXELS = 20;
     public static final int MINIMUM_DISTANCE_BETWEEN_PLATFORMS = 3;
     public static final int MAXIMUM_DISTANCE_BETWEEN_PLATFORMS = 5;
     public static final int MAXIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER = 3;
@@ -100,7 +100,6 @@ public class WorldGenerator {
 
     private void addPlatfromsToList(List<Platform> platforms, int y, int numberOfPlatforms) {
         double lastPlacedPlatformX = platforms.get(platforms.size() - 1).getX() + (Math.pow(-1, random.nextInt(5) + 1) * ((random.nextInt(10)) * PLATFORM_NUMBER_OF_PIXELS));
-        System.out.println((Math.pow(-100, random.nextInt(2) + 1) * ((random.nextInt(3) + 3) * PLATFORM_NUMBER_OF_PIXELS)));
         double lastPlacedPlatformY = platforms.get(platforms.size() - 1).getY();
         for (int i = 0; i < numberOfPlatforms; i++) {
             int totalX = (int)(i * PLATFORM_NUMBER_OF_PIXELS + lastPlacedPlatformX);
