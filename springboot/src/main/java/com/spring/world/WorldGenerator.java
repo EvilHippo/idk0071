@@ -64,6 +64,20 @@ public class WorldGenerator {
         this.height = height;
         this.numberOfPlatforms = numberOfPlatforms;
         world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+
         printCoordinates();
     }
 
