@@ -1,0 +1,44 @@
+<template>
+
+
+  <div class="backBox">
+    <h1 class="main">Farshock
+      <p class="call1">Your country needs YOU!</p>
+      <p class="call2">Enlist today!</p>
+    </h1>
+
+    <div class="mainBox">
+
+      <h1>
+        ${message}
+      </h1>
+      <button class="btn btn-create" click.trigger="playGame()">PLAY!</button>
+      <p id="error"></p>
+
+
+    </div>
+
+    <div class="backBox" id="gameBox">
+      <h1 class="section" id="chooseConfi">
+        Choose a configuration to start a game
+      </h1>
+    </div>
+
+    <div class="backBox">
+      <h1 class="section">
+        Leaderboard
+      </h1>
+      <table style="width: 85%;" id="results">
+        <tr>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+      </table>
+    </div>
+
+
+  </div>
+
+
+
+</template>
