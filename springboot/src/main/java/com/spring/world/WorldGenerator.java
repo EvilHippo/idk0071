@@ -69,15 +69,7 @@ public class WorldGenerator {
         world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
         world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
         world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-
+        placePlatFormsOnTheSides();
         printCoordinates();
     }
 
@@ -108,11 +100,11 @@ public class WorldGenerator {
     private void addPlatformsToList(List<Platform> platforms, int y, int numberOfPlatforms) {
         double lastPlacedPlatformX = platforms.get(platforms.size() - 1).getX() + getNextPlatformsXCoordinateDifference();
         double lastPlacedPlatformY = platforms.get(platforms.size() - 1).getY();
-        while (lastPlacedPlatformX > width - PLATFORM_NUMBER_OF_PIXELS * 0.5) {
+        while (lastPlacedPlatformX > width * 0.9 - PLATFORM_NUMBER_OF_PIXELS * 0.5) {
             lastPlacedPlatformX -= (random.nextInt(3) + 1) * PLATFORM_NUMBER_OF_PIXELS;
         }
 
-        while (PLATFORM_NUMBER_OF_PIXELS * 0.5 > lastPlacedPlatformX) {
+        while (PLATFORM_NUMBER_OF_PIXELS * 0.5 + width * 0.1 > lastPlacedPlatformX) {
             lastPlacedPlatformX += (random.nextInt(3) + 1) * PLATFORM_NUMBER_OF_PIXELS;
         }
         for (int i = 0; i < numberOfPlatforms; i++) {
@@ -135,5 +127,22 @@ public class WorldGenerator {
                 world.getPlatforms()) {
             System.out.println("X: " + platform.getX() + " Y: " + platform.getY());
         }
+    }
+
+    public void placePlatFormsOnTheSides() {
+        for (int y = height / PLATFORM_NUMBER_OF_PIXELS; y >= 0; y--) {
+            for (int x = 0; x <= width; x++) {
+                //System.out.println(x);
+                if(x == 0 || y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0 && x < width - PLATFORM_NUMBER_OF_PIXELS) {
+                    world.getPlatforms().add(new BasicPlatform(x + PLATFORM_NUMBER_OF_PIXELS * 0.5, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS * 0.5));
+                } else if(x == width) {
+                    world.getPlatforms().add(new BasicPlatform(x - PLATFORM_NUMBER_OF_PIXELS * 0.5, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS * 0.5));
+                }
+
+            }
+            System.out.println();
+
+        }
+
     }
 }
