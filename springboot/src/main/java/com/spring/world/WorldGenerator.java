@@ -26,7 +26,7 @@ public class WorldGenerator {
     public static final int MAXIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER = 3;
     public static final int MINIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER = 2;
 
-    private World world = new World();
+    private World world;
     public int getWidth() {
         return width;
     }
@@ -62,13 +62,14 @@ public class WorldGenerator {
     public WorldGenerator(int width, int height, int numberOfPlatforms) {
         this.width = width;
         this.height = height;
+        world = new World(width, height);
         this.numberOfPlatforms = numberOfPlatforms;
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
-        world.getPlatforms().addAll(generateWorld(new ArrayList<>()));
+        world.addPlatform(generateWorld(new ArrayList<>()));
+        world.addPlatform(generateWorld(new ArrayList<>()));
+        world.addPlatform(generateWorld(new ArrayList<>()));
+        world.addPlatform(generateWorld(new ArrayList<>()));
+        world.addPlatform(generateWorld(new ArrayList<>()));
+        world.addPlatform(generateWorld(new ArrayList<>()));
         placePlatFormsOnTheSides();
         printCoordinates();
     }
@@ -130,13 +131,14 @@ public class WorldGenerator {
     }
 
     public void placePlatFormsOnTheSides() {
-        for (int y = height / PLATFORM_NUMBER_OF_PIXELS; y >= 0; y--) {
+        for (int y = world.getBiggestHeight() / PLATFORM_NUMBER_OF_PIXELS; y >= 0; y--) {
+            System.out.println(world.getBiggestHeight());
             for (int x = 0; x <= width; x++) {
                 //System.out.println(x);
                 if(x == 0 || y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0 && x < width - PLATFORM_NUMBER_OF_PIXELS) {
-                    world.getPlatforms().add(new BasicPlatform(x + PLATFORM_NUMBER_OF_PIXELS * 0.5, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS * 0.5));
+                    world.addPlatform(new BasicPlatform(x + PLATFORM_NUMBER_OF_PIXELS * 0.5, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS * 0.5));
                 } else if(x == width) {
-                    world.getPlatforms().add(new BasicPlatform(x - PLATFORM_NUMBER_OF_PIXELS * 0.5, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS * 0.5));
+                    world.addPlatform(new BasicPlatform(x - PLATFORM_NUMBER_OF_PIXELS * 0.5, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS * 0.5));
                 }
 
             }
@@ -145,4 +147,5 @@ public class WorldGenerator {
         }
 
     }
+
 }
