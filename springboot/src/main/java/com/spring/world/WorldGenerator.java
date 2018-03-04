@@ -88,8 +88,8 @@ public class WorldGenerator {
         int y = (random.nextInt(MAXIMUM_DISTANCE_BETWEEN_PLATFORMS) + MINIMUM_DISTANCE_BETWEEN_PLATFORMS) * PLATFORM_NUMBER_OF_PIXELS;
         int numberOfPlatforms = random.nextInt(MAXIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER) + MINIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER;
         if(platforms.isEmpty()) {
-            int x = random.nextInt((int)(width * 0.6) / PLATFORM_NUMBER_OF_PIXELS) * PLATFORM_NUMBER_OF_PIXELS + (int)(width * 0.2) + (int)(PLATFORM_NUMBER_OF_PIXELS * 0.5);
-            y = random.nextInt(MAXIMUM_DISTANCE_BETWEEN_PLATFORMS) * PLATFORM_NUMBER_OF_PIXELS + (int)(PLATFORM_NUMBER_OF_PIXELS * 0.5);
+            int x = random.nextInt((int)(width * 0.6) / PLATFORM_NUMBER_OF_PIXELS) * PLATFORM_NUMBER_OF_PIXELS + (int)(width * 0.2);
+            y = random.nextInt(MAXIMUM_DISTANCE_BETWEEN_PLATFORMS) * PLATFORM_NUMBER_OF_PIXELS;
             platforms.add(new BasicPlatform(x , y));
         } else {
             addPlatformsToList(platforms, y, numberOfPlatforms);
@@ -132,17 +132,17 @@ public class WorldGenerator {
 
     public void placePlatFormsOnTheSides() {
         for (int y = world.getBiggestHeight() / PLATFORM_NUMBER_OF_PIXELS; y >= 0; y--) {
-            System.out.println(world.getBiggestHeight());
+
             for (int x = 0; x <= width; x++) {
                 //System.out.println(x);
-                if(x == 0 || y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0 && x < width - PLATFORM_NUMBER_OF_PIXELS) {
-                    world.addPlatform(new BasicPlatform(x + PLATFORM_NUMBER_OF_PIXELS * 0.5, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS * 0.5));
+                if(x == 0 || y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0) {
+                    world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS));
                 } else if(x == width) {
-                    world.addPlatform(new BasicPlatform(x - PLATFORM_NUMBER_OF_PIXELS * 0.5, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS * 0.5));
+                    world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS));
                 }
 
             }
-            System.out.println();
+
 
         }
 
