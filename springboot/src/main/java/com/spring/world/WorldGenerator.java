@@ -17,7 +17,7 @@ public class WorldGenerator {
 
     private int numberOfPlatforms;
 
-    public static final int PLATFORM_NUMBER_OF_PIXELS = 100;
+    public static final int PLATFORM_NUMBER_OF_PIXELS = 10;
 
     public static final int MINIMUM_DISTANCE_BETWEEN_PLATFORMS = 3;
 
@@ -116,7 +116,7 @@ public class WorldGenerator {
             }
 
 
-            platforms.add(new BasicPlatform(totalX + PLATFORM_NUMBER_OF_PIXELS, y + lastPlacedPlatformY + PLATFORM_NUMBER_OF_PIXELS, "platform.jpg"));
+            platforms.add(new BasicPlatform(totalX, y + lastPlacedPlatformY, "platform.jpg"));
         }
     }
 
@@ -137,9 +137,9 @@ public class WorldGenerator {
             for (int x = 0; x <= width; x++) {
                 //System.out.println(x);
                 if(x == 0 || x == width) {
-                    world.addPlatform(new BasicPlatform(x + PLATFORM_NUMBER_OF_PIXELS, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS, "side.jpg"));
+                    world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS, "side.jpg"));
                 } else if(y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0 || y * PLATFORM_NUMBER_OF_PIXELS == world.getBiggestHeight() && x % PLATFORM_NUMBER_OF_PIXELS == 0) {
-                    world.addPlatform(new BasicPlatform(x + PLATFORM_NUMBER_OF_PIXELS, y * PLATFORM_NUMBER_OF_PIXELS + PLATFORM_NUMBER_OF_PIXELS, "ground.jpg"));
+                    world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS, "ground.jpg"));
 
                 }
 
