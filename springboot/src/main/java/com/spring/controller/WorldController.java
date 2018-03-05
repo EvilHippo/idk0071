@@ -22,12 +22,4 @@ public class WorldController {
         ConsoleDrawMap.drawMapIntoConsole(worldGenerator);
         return worldGenerator.getWorld();
     }
-    @RequestMapping("/world/dummy")
-    public List<Platform> getWorldDummy() {
-
-
-
-
-        return Arrays.asList(new BasicPlatform(240, 100), new BasicPlatform(100, 100), new BasicPlatform(300, 300));
-    }
 }

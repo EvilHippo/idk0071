@@ -70,7 +70,7 @@ public class WorldGenerator {
         world.addPlatform(generateWorld(new ArrayList<>()));
         world.addPlatform(generateWorld(new ArrayList<>()));
         world.addPlatform(generateWorld(new ArrayList<>()));
-        placePlatFormsOnTheSides();
+        placePlatFormsOnTheSidesAndBottom();
         printCoordinates();
         invertYAxis();
     }
@@ -91,7 +91,7 @@ public class WorldGenerator {
         if(platforms.isEmpty()) {
             int x = random.nextInt((int)(width * 0.6) / PLATFORM_NUMBER_OF_PIXELS) * PLATFORM_NUMBER_OF_PIXELS + (int)(width * 0.2);
             y = random.nextInt(MAXIMUM_DISTANCE_BETWEEN_PLATFORMS) * PLATFORM_NUMBER_OF_PIXELS;
-            platforms.add(new BasicPlatform(x , y));
+            platforms.add(new BasicPlatform(x , y, "platform.jpg"));
         } else {
             addPlatformsToList(platforms, y, numberOfPlatforms);
         }
@@ -116,7 +116,7 @@ public class WorldGenerator {
             }
 
 
-            platforms.add(new BasicPlatform(totalX, y + lastPlacedPlatformY));
+            platforms.add(new BasicPlatform(totalX, y + lastPlacedPlatformY, "platform.jpg"));
         }
     }
 
@@ -131,13 +131,16 @@ public class WorldGenerator {
         }
     }
 
-    public void placePlatFormsOnTheSides() {
+    public void placePlatFormsOnTheSidesAndBottom() {
         for (int y = world.getBiggestHeight() / PLATFORM_NUMBER_OF_PIXELS; y >= 0; y--) {
 
             for (int x = 0; x <= width; x++) {
                 //System.out.println(x);
-                if(x == 0 || y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0 || x == width || y * PLATFORM_NUMBER_OF_PIXELS == world.getBiggestHeight() && x % PLATFORM_NUMBER_OF_PIXELS == 0) {
-                    world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS));
+                if(x == 0 || x == width) {
+                    world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS, "side.jpg"));
+                } else if(y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0 || y * PLATFORM_NUMBER_OF_PIXELS == world.getBiggestHeight() && x % PLATFORM_NUMBER_OF_PIXELS == 0) {
+                    world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS, "ground.jpg"));
+
                 }
 
             }

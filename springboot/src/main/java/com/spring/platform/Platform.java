@@ -2,10 +2,17 @@ package com.spring.platform;
 
 public abstract class Platform {
 
-    private int id = 0;
     private double x = 0;
     private double y = 0;
+    private String picture;
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public double getX() {
         return x;
@@ -23,9 +30,10 @@ public abstract class Platform {
         this.y = y;
     }
 
-    Platform(double x, double y) {
+    Platform(double x, double y, String picture) {
         this.x = x;
         this.y = y;
+        this.picture = picture;
     }
 
 
