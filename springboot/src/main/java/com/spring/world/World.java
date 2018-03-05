@@ -9,11 +9,20 @@ import java.util.List;
 public class World {
     private int width;
     private int height;
+    private int platformSize;
     @JsonIgnore
     private int biggestHeight = 0;
     private List<Platform> platforms = new ArrayList<>();
     @JsonIgnore
     private List<Platform> lastAddedPlatforms = new ArrayList<>();
+
+    public int getPlatformSize() {
+        return platformSize;
+    }
+
+    public void setPlatformSize(int platformSize) {
+        this.platformSize = platformSize;
+    }
 
     public int getBiggestHeight() {
         return biggestHeight;
@@ -23,10 +32,11 @@ public class World {
         this.biggestHeight = biggestHeight;
     }
 
-    public World(int width) {
+    public World(int width, int platformSize) {
 
         this.width = width;
 
+        this.platformSize = platformSize;
     }
 
     public List<Platform> getPlatforms() {
