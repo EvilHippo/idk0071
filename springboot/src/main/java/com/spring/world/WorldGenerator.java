@@ -25,7 +25,7 @@ public class WorldGenerator {
 
     public static final int MAXIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER = 3;
     public static final int MINIMUM_NUMBER_OF_PLATFORM_NEXT_TO_EACH_OTHER = 2;
-
+    //
     private World world;
     public int getWidth() {
         return width;
