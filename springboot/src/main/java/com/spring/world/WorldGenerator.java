@@ -62,7 +62,7 @@ public class WorldGenerator {
     public WorldGenerator(int width, int height, int numberOfPlatforms) {
         this.width = width;
         this.height = height;
-        world = new World(width);
+        world = new World(width, PLATFORM_NUMBER_OF_PIXELS);
         this.numberOfPlatforms = numberOfPlatforms;
         world.addPlatform(generateWorld(new ArrayList<>()));
         world.addPlatform(generateWorld(new ArrayList<>()));
