@@ -62,7 +62,7 @@ public class WorldGenerator {
     public WorldGenerator(int width, int height, int numberOfPlatforms) {
         this.width = width;
         this.height = height;
-        world = new World(width, height);
+        world = new World(width);
         this.numberOfPlatforms = numberOfPlatforms;
         world.addPlatform(generateWorld(new ArrayList<>()));
         world.addPlatform(generateWorld(new ArrayList<>()));
@@ -72,6 +72,7 @@ public class WorldGenerator {
         world.addPlatform(generateWorld(new ArrayList<>()));
         placePlatFormsOnTheSides();
         printCoordinates();
+        invertYAxis();
     }
 
 
@@ -135,9 +136,7 @@ public class WorldGenerator {
 
             for (int x = 0; x <= width; x++) {
                 //System.out.println(x);
-                if(x == 0 || y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0) {
-                    world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS));
-                } else if(x == width) {
+                if(x == 0 || y == 0 && x % PLATFORM_NUMBER_OF_PIXELS == 0 || x == width || y * PLATFORM_NUMBER_OF_PIXELS == world.getBiggestHeight() && x % PLATFORM_NUMBER_OF_PIXELS == 0) {
                     world.addPlatform(new BasicPlatform(x, y * PLATFORM_NUMBER_OF_PIXELS));
                 }
 
@@ -146,6 +145,12 @@ public class WorldGenerator {
 
         }
 
+    }
+    public void invertYAxis() {
+        for (Platform platform : world.getPlatforms()) {
+            platform.setY(world.getBiggestHeight() - platform.getY());
+
+        }
     }
 
 }
