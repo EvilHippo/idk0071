@@ -9,10 +9,24 @@
 
     <div class="mainBox">
 
-      <h1>
-        ${message}
-      </h1>
-      <button class="btn btn-create" click.trigger="playGame()">PLAY!</button>
+      <button class="btn btn-create" id="playbtn" click.trigger="playGame()">PLAY!</button>
+      <br>
+
+
+
+      <div style=" width: 25px; height: 25px; position: absolute; overflow:auto;);background-image: url('src/platform.png');top: 175px;left: 605px;"></div>
+      <br>
+
+      <div ref="testDiv" class = "dont style me" id="testid" style=" background-color: blue; width: 925px; position: relative;overflow:hidden">
+        <div id="testbox" style="background-color: red; width: 25px; height: 25px; z-index: 999; position: absolute">il be a player one day!</div>
+
+
+
+        <div innerhtml.two-way="htmlText">
+
+        </div>
+      </div>
+      <br>
       <p id="error"></p>
 
 
@@ -35,6 +49,9 @@
         </tr>
       </table>
     </div>
+
+
+
 
 
   </div>

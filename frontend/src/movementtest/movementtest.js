@@ -1,10 +1,21 @@
-
+import {HttpClient} from 'aurelia-fetch-client';
 
 export class movementtest {
 
   constructor() {
     this.message = "platformer.js";
     this.htmlText = "";
+  }
+
+  fetchTest2() {
+    let client = new HttpClient();
+
+    client.fetch('package.json')
+      .then(response => response.json())
+      .then(data => {
+        return data;
+        console.log(data.description);
+      });
   }
 
   fetchTest() {
