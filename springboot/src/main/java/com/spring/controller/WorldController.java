@@ -18,7 +18,7 @@ public class WorldController {
 
 
 
-        WorldGenerator worldGenerator = new WorldGenerator(800, 1200, 10);
+        WorldGenerator worldGenerator = new WorldGenerator(900, 1000, 5);
         ConsoleDrawMap.drawMapIntoConsole(worldGenerator);
         return worldGenerator.getWorld();
     }
