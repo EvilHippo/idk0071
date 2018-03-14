@@ -17,7 +17,7 @@ public class WorldGenerator {
 
     private int numberOfPlatforms;
 
-    public static final int PLATFORM_NUMBER_OF_PIXELS = 100;
+    public static final int PLATFORM_NUMBER_OF_PIXELS = 10;
 
     public static final int MINIMUM_DISTANCE_BETWEEN_PLATFORMS = 3;
 
