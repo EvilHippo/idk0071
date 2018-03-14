@@ -43,6 +43,7 @@
         ],
         "dependencies": [
           "aurelia-binding",
+          "aurelia-fetch-client",
           "aurelia-bootstrapper",
           "aurelia-dependency-injection",
           "aurelia-event-aggregator",

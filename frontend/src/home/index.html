@@ -8,11 +8,25 @@
     </h1>
 
     <div class="mainBox">
-
+     <h1 if.bind="play">GAME OVER!</h1>
       <h1>
         ${message}
       </h1>
-      <button class="btn btn-create" click.trigger="playGame()">PLAY!</button>
+      <button type="button" id="playbtn" click.trigger="playGame()">Play</button>
+      <div style=" width: 25px; height: 25px; position: absolute; overflow:auto;);background-image: url('src/platform.png');top: 175px;left: 605px;"></div>
+      <br>
+
+      <div ref="testDiv" class = "dont style me" id="testid" style=" background-color: blue; width: 925px; position: relative;overflow:hidden">
+        <div id="testbox" style="width:40px; height: 40px; z-index: 999; position: absolute; background-image: url('mightyblob.jpg'); background-size:100%; background-repeat: no-repeat;"></div>
+
+
+
+        <div innerhtml.two-way="htmlText">
+
+        </div>
+      </div>
+      <br>
+
       <p id="error"></p>
 
 
