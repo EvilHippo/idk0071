@@ -8,9 +8,7 @@ import javax.persistence.*;
 @Table(name="Player")
 public class Player {
 
-    @Id @GeneratedValue(strategy= GenerationType.AUTO) @JsonIgnore
-    private long id;
-    @Column(unique = true)
+    @Id
     private long UID;
     private double x;
     private double y;
@@ -45,5 +43,8 @@ public class Player {
         this.x = x;
         this.y = y;
         this.UID = UID;
+    }
+    public Player() {
+
     }
 }
