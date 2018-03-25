@@ -4,6 +4,7 @@ import com.spring.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +33,8 @@ public class PlayerService {
     }
     public Optional<List<Player>> getPlayersToPlay(Long UID) {
         playerRepository.findAll().forEach(player -> {
+            System.out.println("HELOOO");
+            System.out.println(player.isReady() + "*********");
             if(player.getUID() != UID && player.getOpponentUID() == 0 && getPlayer(UID).getOpponentUID() == 0) {
                 player.setOpponentUID(UID);
                 getPlayer(UID).setOpponentUID(player.getUID());
@@ -40,9 +43,14 @@ public class PlayerService {
             }
 
         });
-        if(getPlayer(UID).getOpponentUID() != 0) {
-            return Optional.of(Arrays.asList(getPlayer(UID), getPlayer(getPlayer(UID).getOpponentUID())));
-        } else {
+        try {
+            if (getPlayer(UID).getOpponentUID() != 0) {
+                return Optional.of(Arrays.asList(getPlayer(UID), getPlayer(getPlayer(UID).getOpponentUID())));
+            } else {
+                return Optional.empty();
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
             return Optional.empty();
         }
     }
@@ -54,5 +62,25 @@ public class PlayerService {
 
         }
         return b;
+    }
+    public List<Player> getAllPlayers() {
+        List<Player> players = new ArrayList<>();
+        for (Player p :
+                playerRepository.findAll()) {
+            players.add(p);
+
+        }
+        return players;
+    }
+    public boolean checkGameReadyState(long UID) {
+        try {
+            System.out.println(getPlayer(UID).isReady() + "**");
+            System.out.println(getPlayer(UID).getOpponentUID() + "****");
+            System.out.println(getPlayer(getPlayer(UID).getOpponentUID()).isReady() + "******");
+            return getPlayer(UID).isReady() && getPlayer(UID).getOpponentUID() != 0 && getPlayer(getPlayer(UID).getOpponentUID()).isReady();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

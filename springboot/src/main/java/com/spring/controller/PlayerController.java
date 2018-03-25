@@ -43,11 +43,15 @@ public class PlayerController {
         return Arrays.asList(new Player(), new Player());
 
     }
+    @RequestMapping(value="user/getAllPlayers")
+    public List<Player> getAllPlayers(){
+        return playerService.getAllPlayers();
+
+    }
     @RequestMapping(value="user/getAll")
-    public String getAllPlayers(){
+    public String getAll(){
         return playerService.getAll();
 
     }
-
 
 }

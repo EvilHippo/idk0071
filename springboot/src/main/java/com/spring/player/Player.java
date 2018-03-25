@@ -11,6 +11,24 @@ public class Player {
     private double x;
     private double y;
     private long opponentUID = 0;
+    private String movement;
+    private boolean ready = false;
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
+    public String getMovement() {
+        return movement;
+    }
+
+    public void setMovement(String movement) {
+        this.movement = movement;
+    }
 
     public long getOpponentUID() {
         return opponentUID;

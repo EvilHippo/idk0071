@@ -1,5 +1,7 @@
 package com.spring.controller;
 
+import com.google.gson.Gson;
+import com.spring.player.Player;
 import com.spring.repository.PlayerService;
 import com.spring.test.Greeting;
 import com.spring.test.HelloMessage;
@@ -13,15 +15,35 @@ public class GameController {
 
     @Autowired
     private PlayerService playerService;
+    private Gson gson = new Gson();
 
     @MessageMapping("/game")
     @SendTo("/game/play")
-    public Greeting greeting(String message) throws Exception {
+    public String getGameCoordinates(String playerJSON) throws Exception {
         long start = System.currentTimeMillis();
+        Player player = gson.fromJson(playerJSON, Player.class);
 
+        if(playerService.checkGameReadyState(player.getUID())) {
+            player.setOpponentUID(playerService.getPlayer(player.getUID()).getOpponentUID());
+            playerService.updatePlayer(player);
+            return playerJSON + " " + (System.currentTimeMillis() - start);
+        }
+        return "Game Has Not started yet";
+    }
 
+    @MessageMapping("/game/start")
+    @SendTo("/game/start")
+    public String startGame(String playerJSON) throws Exception {
 
+        Player player = gson.fromJson(playerJSON, Player.class);
+        player.setOpponentUID(playerService.getPlayer(player.getUID()).getOpponentUID());
+        playerService.updatePlayer(player);
 
-        return new Greeting("Hello, " + message + "!" + " " + (System.currentTimeMillis() - start));
+        if(playerService.checkGameReadyState(player.getUID())) {
+            return "{ \"game started\": true }";
+        } else {
+            return "{ \"game started\": false }";
+        }
+
     }
 }
