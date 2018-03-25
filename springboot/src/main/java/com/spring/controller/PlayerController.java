@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 public class PlayerController {
@@ -31,6 +33,19 @@ public class PlayerController {
     @RequestMapping(value="user/get", method = RequestMethod.POST)
     public Player getPlayerInDatabase(@RequestBody String playerInJson){
         return playerService.getPlayer(gson.fromJson(playerInJson, Player.class).getUID());
+
+    }
+    @RequestMapping(value="user/play", method = RequestMethod.POST)
+    public List<Player> getPlayerToPlay(@RequestBody String playerInJson){
+        if(playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).isPresent()) {
+            return playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get();
+        }
+        return Arrays.asList(new Player(), new Player());
+
+    }
+    @RequestMapping(value="user/getAll")
+    public String getAllPlayers(){
+        return playerService.getAll();
 
     }
 

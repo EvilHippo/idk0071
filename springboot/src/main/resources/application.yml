@@ -8,7 +8,7 @@ spring:
     jpa:
         hibernate:
             ddl-auto: create-drop
-            naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+
         properties:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true

@@ -1,7 +1,5 @@
 package com.spring.player;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +10,15 @@ public class Player {
     private long UID;
     private double x;
     private double y;
+    private long opponentUID = 0;
+
+    public long getOpponentUID() {
+        return opponentUID;
+    }
+
+    public void setOpponentUID(long opponentUID) {
+        this.opponentUID = opponentUID;
+    }
 
     public long getUID() {
         return UID;
@@ -46,5 +53,9 @@ public class Player {
     }
     public Player() {
 
+    }
+    @Override
+    public String toString() {
+        return String.format("Player[id=%d, Opid=%d]", UID, opponentUID);
     }
 }
