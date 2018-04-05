@@ -20,15 +20,18 @@ public class GameController {
     @MessageMapping("/game")
     @SendTo("/game/play")
     public String getGameCoordinates(String playerJSON) throws Exception {
-        long start = System.currentTimeMillis();
+    try {
         Player player = gson.fromJson(playerJSON, Player.class);
 
-        if(playerService.checkGameReadyState(player.getUID())) {
-            player.setOpponentUID(playerService.getPlayer(player.getUID()).getOpponentUID());
-            playerService.updatePlayer(player);
-            return playerJSON + " " + (System.currentTimeMillis() - start);
-        }
-        return "Game Has Not started yet";
+
+        player.setOpponentUID(playerService.getPlayer(player.getUID()).getOpponentUID());
+        playerService.updatePlayer(player);
+        return playerJSON;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return playerJSON;
+    }
+
     }
 
     @MessageMapping("/game/start")
