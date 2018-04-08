@@ -15,7 +15,7 @@ public class GameController {
     private PlayerService playerService;
     private Gson gson = new Gson();
 
-    @MessageMapping("/game/play")
+    @MessageMapping("/game")
     @SendTo("/game/play")
     public String getGameCoordinates(String playerJSON) throws Exception {
         System.out.println(playerJSON);
