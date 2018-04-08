@@ -4,10 +4,15 @@ import com.google.gson.Gson;
 import com.spring.map.CompleteMap;
 import com.spring.platform.BasicPlatform;
 import com.spring.platform.Platform;
+import com.spring.player.Player;
+import com.spring.repository.PlayerService;
 import com.spring.world.World;
 import com.spring.world.WorldGenerator;
 import console.draw.ConsoleDrawMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
@@ -15,11 +20,30 @@ import java.util.List;
 
 @RestController
 public class WorldController {
+    @Autowired
+    private PlayerService playerService;
+    private Gson gson = new Gson();
     @RequestMapping("/world")
     public String getWorld() {
+
         CompleteMap completeMap = new CompleteMap();
         completeMap.getJsonInTiledFormatWithDataInserted();
         return completeMap.getJsonInTiledFormatWithDataInserted();
+    }
+    @RequestMapping(value="/world/post", method = RequestMethod.POST)
+    public String getWorldPost(@RequestBody String playerInJson) {
+
+        if(!playerService.checkIfOpponentHasMap(gson.fromJson(playerInJson, Player.class).getUID())) {
+            Player player = playerService.getPlayer(gson.fromJson(playerInJson, Player.class).getUID());
+            CompleteMap completeMap = new CompleteMap();
+            String map = completeMap.getJsonInTiledFormatWithDataInserted();
+            player.setMap(map);
+            playerService.updatePlayer(player);
+            return map;
+        } else {
+            return playerService.getOpponentMap(gson.fromJson(playerInJson, Player.class).getUID());
+        }
+
     }
     @RequestMapping("/world/dummy")
     public String getWorldDummy() {

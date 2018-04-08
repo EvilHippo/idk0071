@@ -83,4 +83,15 @@ public class PlayerService {
             return false;
         }
     }
+    public boolean checkIfOpponentHasMap(long UID) {
+        try {
+            return getPlayer(UID).getMap() == null && getPlayer(UID).getOpponentUID() != 0 && getPlayer(getPlayer(UID).getOpponentUID()).getMap() != null && getPlayer(getPlayer(UID).getOpponentUID()).getOpponentUID() != 0;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public String getOpponentMap(long UID) {
+        return getPlayer(getPlayer(UID).getOpponentUID()).getMap();
+    }
 }

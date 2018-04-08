@@ -1,5 +1,7 @@
 package com.spring.player;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,16 @@ public class Player {
     private long opponentUID = 0;
     private String movement;
     private boolean ready = false;
+    @Column(length=100000)
+    private String map;
+
+    public String getMap() {
+        return map;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
+    }
 
     public boolean isReady() {
         return ready;

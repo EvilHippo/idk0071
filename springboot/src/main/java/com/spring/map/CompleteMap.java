@@ -16,7 +16,7 @@ public class CompleteMap {
         JsonObject jsonObject = gson.fromJson(fileReaderJson.readFromFile("C:\\Users\\Door\\IdeaProjects\\idk0071\\springboot\\src\\main\\resources\\map\\mapTemplate.txt"), JsonObject.class); // parse
         JsonArray jsonArray = new JsonArray();
         // Adds all middle platform data to json array, currently map size is 100 blocks, each part consists of 25 blocks, so 3 * 25 middle blocks + 25 beginning blocks = 100
-        for (int numberOfRandomMapParts = 0; numberOfRandomMapParts < 3; numberOfRandomMapParts++) {
+        for (int numberOfRandomMapParts = 0; numberOfRandomMapParts < 7; numberOfRandomMapParts++) {
             MapMiddle map = new MapMiddle();
             map.readOneRandomFileOfMiddlePlatformData();
             map.addAllDataElementsToJsonArray(jsonArray);
@@ -29,7 +29,7 @@ public class CompleteMap {
         }
 
         jsonObject.getAsJsonArray("layers").get(0).getAsJsonObject().getAsJsonArray("data").addAll(jsonArray); // adding all platform data to the map template
-
+        System.out.println(jsonObject);
         return jsonObject.toString();
     }
 
