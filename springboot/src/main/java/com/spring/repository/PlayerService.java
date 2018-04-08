@@ -16,6 +16,7 @@ public class PlayerService {
     private PlayerRepository playerRepository;
 
     public void addPlayer(Player player) {
+
         playerRepository.save(player);
 
     }
@@ -32,9 +33,9 @@ public class PlayerService {
 
     }
     public Optional<List<Player>> getPlayersToPlay(Long UID) {
+
         playerRepository.findAll().forEach(player -> {
-            System.out.println("HELOOO");
-            System.out.println(player.isReady() + "*********");
+
             if(player.getUID() != UID && player.getOpponentUID() == 0 && getPlayer(UID).getOpponentUID() == 0) {
                 player.setOpponentUID(UID);
                 getPlayer(UID).setOpponentUID(player.getUID());
@@ -43,6 +44,8 @@ public class PlayerService {
             }
 
         });
+
+
         try {
             if (getPlayer(UID).getOpponentUID() != 0) {
                 return Optional.of(Arrays.asList(getPlayer(UID), getPlayer(getPlayer(UID).getOpponentUID())));
@@ -74,10 +77,7 @@ public class PlayerService {
     }
     public boolean checkGameReadyState(long UID) {
         try {
-            System.out.println(getPlayer(UID).isReady() + "**");
-            System.out.println(getPlayer(UID).getOpponentUID() + "****");
-            System.out.println(getPlayer(getPlayer(UID).getOpponentUID()).isReady() + "******");
-            return getPlayer(UID).isReady() && getPlayer(UID).getOpponentUID() != 0 && getPlayer(getPlayer(UID).getOpponentUID()).isReady();
+            return getPlayer(UID).isReady() && getPlayer(UID).getOpponentUID() != 0 && getPlayer(getPlayer(UID).getOpponentUID()).isReady() && getPlayer(getPlayer(UID).getOpponentUID()).getOpponentUID() != 0;
         } catch (NullPointerException e) {
             e.printStackTrace();
             return false;
