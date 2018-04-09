@@ -24,7 +24,8 @@ repositories {
 
 
 dependencies {
-
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('com.h2database:h2')
 	compile ('com.google.code.gson:gson')
 	compile('org.springframework.boot:spring-boot-starter-websocket')
 	compile("org.webjars:webjars-locator-core")
