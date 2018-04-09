@@ -1,6 +1,7 @@
 package com.spring.controller;
 
 import com.google.gson.Gson;
+import com.spring.map.CompleteMap;
 import com.spring.player.Player;
 import com.spring.repository.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,10 @@ public class GameController {
         player.setReady(true);
         playerService.updatePlayer(player);
         if(playerService.checkGameReadyState(player.getUID())) {
-            return "{ \"game started\": true }";
+            CompleteMap completeMap = new CompleteMap();
+            completeMap.getJsonInTiledFormatWithDataInserted();
+            return completeMap.getJsonInTiledFormatWithDataInserted();
+
         } else {
             return "{ \"game started\": false }";
         }
