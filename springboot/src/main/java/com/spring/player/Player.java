@@ -17,6 +17,16 @@ public class Player {
     private boolean ready = false;
     @Column(length=100000)
     private String map;
+    private String option;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getMap() {
         return map;
@@ -74,6 +84,13 @@ public class Player {
         this.y = y;
     }
 
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
 
     public Player(double x, double y, long UID) {
 
