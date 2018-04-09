@@ -15,6 +15,7 @@ public class Player {
     private long opponentUID = 0;
     private String movement;
     private boolean ready = false;
+
     @Column(length=100000)
     private String map;
 

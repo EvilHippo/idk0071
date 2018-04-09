@@ -98,5 +98,10 @@ public class PlayerServiceTest {
         playerService.getPlayersToPlay((long)1);
         assertEquals(true, playerService.checkGameReadyState(1));
     }
+    @Test
+    public void testCheckGameReadyStateWithWrongUID() {
+        playerService.getPlayersToPlay((long)1);
+        assertEquals(false, playerService.checkGameReadyState(100));
+    }
 
 }
