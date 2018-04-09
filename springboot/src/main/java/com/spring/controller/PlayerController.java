@@ -18,9 +18,10 @@ public class PlayerController {
     private   Gson gson = new Gson();
     @RequestMapping(value="user/create", method = RequestMethod.POST)
     public void addPlayerInDatabase(@RequestBody String playerInJson){
+        System.out.println(playerInJson);
         playerService.addPlayer(gson.fromJson(playerInJson, Player.class));
-
     }
+
     @RequestMapping(value="user/update", method = RequestMethod.POST)
     public void updatePlayerInDatabase(@RequestBody String playerInJson){
         playerService.updatePlayer(gson.fromJson(playerInJson, Player.class));
@@ -38,6 +39,7 @@ public class PlayerController {
     }
     @RequestMapping(value="user/play", method = RequestMethod.POST)
     public List<Player> getPlayerToPlay(@RequestBody String playerInJson){
+        System.out.println("CAKE AND GLORY HERE: " + playerInJson);
         if(playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).isPresent()) {
             Player player1 = playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get().get(0);
             Player player2 = playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get().get(1);
@@ -51,6 +53,7 @@ public class PlayerController {
             }
             return Arrays.asList(player1, player2);
         }
+        System.out.println("cake 12" + Arrays.asList(new Player(), new Player()));
         return Arrays.asList(new Player(), new Player());
 
     }
