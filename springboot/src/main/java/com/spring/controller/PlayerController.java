@@ -41,12 +41,14 @@ public class PlayerController {
         if(playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).isPresent()) {
             Player player1 = playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get().get(0);
             Player player2 = playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get().get(1);
-            CompleteMap completeMap = new CompleteMap();
-            String map = completeMap.getJsonInTiledFormatWithDataInserted();
-            player1.setMap(map);
-            player2.setMap(map);
-            playerService.updatePlayer(player1);
-            playerService.updatePlayer(player2);
+            if(player1.getMap() == null) {
+                CompleteMap completeMap = new CompleteMap();
+                String map = completeMap.getJsonInTiledFormatWithDataInserted();
+                player1.setMap(map);
+                player2.setMap(map);
+                playerService.updatePlayer(player1);
+                playerService.updatePlayer(player2);
+            }
             return Arrays.asList(player1, player2);
         }
         return Arrays.asList(new Player(), new Player());
