@@ -2,13 +2,10 @@ package com.spring.controller;
 
 import com.google.gson.Gson;
 import com.spring.map.CompleteMap;
-import com.spring.platform.BasicPlatform;
-import com.spring.platform.Platform;
+
 import com.spring.player.Player;
 import com.spring.repository.PlayerService;
-import com.spring.world.World;
-import com.spring.world.WorldGenerator;
-import console.draw.ConsoleDrawMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +20,7 @@ public class WorldController {
     @Autowired
     private PlayerService playerService;
     private Gson gson = new Gson();
+
     @RequestMapping("/world")
     public String getWorld() {
 

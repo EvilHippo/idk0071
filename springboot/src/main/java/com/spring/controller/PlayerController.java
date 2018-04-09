@@ -16,9 +16,9 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
     private   Gson gson = new Gson();
+
     @RequestMapping(value="user/create", method = RequestMethod.POST)
     public void addPlayerInDatabase(@RequestBody String playerInJson){
-        System.out.println(playerInJson);
         playerService.addPlayer(gson.fromJson(playerInJson, Player.class));
     }
 
@@ -39,10 +39,12 @@ public class PlayerController {
     }
     @RequestMapping(value="user/play", method = RequestMethod.POST)
     public List<Player> getPlayerToPlay(@RequestBody String playerInJson){
-        System.out.println("CAKE AND GLORY HERE: " + playerInJson);
+
         if(playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).isPresent()) {
             Player player1 = playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get().get(0);
             Player player2 = playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get().get(1);
+            //If getMap is null that means that players haven't been assigned a map yet so one will be created.
+            //If it isn't null that means that both players have a map and it will not be modified
             if(player1.getMap() == null) {
                 CompleteMap completeMap = new CompleteMap();
                 String map = completeMap.getJsonInTiledFormatWithDataInserted();
@@ -53,18 +55,12 @@ public class PlayerController {
             }
             return Arrays.asList(player1, player2);
         }
-        System.out.println("cake 12" + Arrays.asList(new Player(), new Player()));
         return Arrays.asList(new Player(), new Player());
 
     }
     @RequestMapping(value="user/getAllPlayers")
     public List<Player> getAllPlayers(){
         return playerService.getAllPlayers();
-
-    }
-    @RequestMapping(value="user/getAll")
-    public String getAll(){
-        return playerService.getAll();
 
     }
 

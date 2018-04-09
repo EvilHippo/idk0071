@@ -17,7 +17,7 @@ public class MapMiddle extends Map {
             numberOfCreatedMapParts = new File("C:\\Users\\Door\\IdeaProjects\\idk0071\\springboot\\src\\main\\resources\\map_middle").list().length;
         } catch (NullPointerException e) {
             e.printStackTrace();
-            numberOfCreatedMapParts = 4;  // current default value
+            numberOfCreatedMapParts = 5;  // current default value
         }
         String filePath = "C:\\Users\\Door\\IdeaProjects\\idk0071\\springboot\\src\\main\\resources\\map_middle\\map_middle_platfrom_data_" + (new Random().nextInt(numberOfCreatedMapParts) + 1) + ".txt";
         Gson gson = new Gson();
