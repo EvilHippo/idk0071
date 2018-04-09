@@ -61,6 +61,9 @@ public class GameController {
     @SendTo("/game/play")
     public String movementUpdate(String playerJSON) throws Exception {
         JSONObject incomingJson = new JSONObject(playerJSON);
+        if(incomingJson.get("move").equals("left") || incomingJson.get("move").equals("right")) {
+            System.out.println("movement update json: " + incomingJson);
+        }
 
         String answer = "{\n" +
                 "  \"option\": \"" + "movementUpdate" + "\",\n" +
