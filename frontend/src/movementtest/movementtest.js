@@ -1,6 +1,5 @@
 import {HttpClient} from 'aurelia-fetch-client';
 
-
 export class movementtest {
 
   constructor() {
