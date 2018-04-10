@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class Map {
     private List<Integer> data = new ArrayList<>();
     private FileReaderJson reader = new FileReaderJson();
-    public static final String PATH_TO_RESOURCE_FOLDER = "C:\\Users\\Door\\IdeaProjects\\idk0071\\springboot\\src\\main\\resources\\";
+    public static final String PATH_TO_RESOURCE_FOLDER = "C:\\Users\\Martin Karjus\\IdeaProjects\\idk0071\\springboot\\src\\main\\resources\\";
 
     public FileReaderJson getReader() {
         return reader;
