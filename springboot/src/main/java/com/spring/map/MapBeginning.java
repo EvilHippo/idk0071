@@ -10,12 +10,12 @@ public class MapBeginning extends Map {
     public void readOneRandomFileOfBeginningPlatformData() {
         int numberOfCreatedMapParts;
         try {
-            numberOfCreatedMapParts = new File("C:\\Users\\Martin Karjus\\IdeaProjects\\idk0071\\springboot\\src\\main\\resources\\map_beginning").list().length;
+            numberOfCreatedMapParts = new File(PATH_TO_RESOURCE_FOLDER + "map_beginning").list().length;
         } catch (NullPointerException e) {
             e.printStackTrace();
             numberOfCreatedMapParts = 1;  // current default value
         }
-        String filePath = "C:\\Users\\Martin Karjus\\IdeaProjects\\idk0071\\springboot\\src\\main\\resources\\map_beginning\\map_beginning_platfrom_data_" + (new Random().nextInt(numberOfCreatedMapParts) + 1) + ".txt";
+        String filePath = PATH_TO_RESOURCE_FOLDER + "map_beginning\\map_beginning_platfrom_data_" + (new Random().nextInt(numberOfCreatedMapParts) + 1) + ".txt";
         Gson gson = new Gson();
         setData(gson.fromJson(getReader().readFromFile(filePath), this.getClass()).getData());
     }
