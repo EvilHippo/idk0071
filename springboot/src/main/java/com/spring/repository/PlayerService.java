@@ -57,20 +57,11 @@ public class PlayerService {
             return Optional.empty();
         }
     }
-    public String getAll() {
-        String b = "";
-        for (Player p :
-                playerRepository.findAll()) {
-            b += p.toString() + "<br>";
 
-        }
-        return b;
-    }
     public List<Player> getAllPlayers() {
         List<Player> players = new ArrayList<>();
-        for (Player p :
-                playerRepository.findAll()) {
-            players.add(p);
+        for (Player player : playerRepository.findAll()) {
+            players.add(player);
 
         }
         return players;
