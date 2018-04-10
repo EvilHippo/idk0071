@@ -19,22 +19,22 @@ public class GameController {
     private PlayerService playerService;
     private Gson gson = new Gson();
 
+    /**
+     * Bounces all sent info to all websocket subscribers.
+     */
     @MessageMapping("/game")
     @SendTo("/game/play")
     public String getGameCoordinates(String playerJSON) throws Exception {
-        System.out.println(playerJSON);
         return playerJSON;
     }
 
+    /**
+     * Confirms game request request.
+     */
     @MessageMapping("/requestGame")
     @SendTo("/game/play")
     public String playerRequestGame(String playerJSON) throws Exception {
-        System.out.println(playerJSON);
-        // TODO only answer once 2 players have joined
-        // {"phonetype":"N95","cat":"WP"}
         JSONObject incomingJson = new JSONObject(playerJSON);
-
-        System.out.println("Request game with id,name : " + incomingJson.get("id") + "  " + incomingJson.get("name"));
 
         String answer = "{\n" +
                 "  \"option\": \"" + "gameRequest" + "\",\n" +
@@ -44,6 +44,10 @@ public class GameController {
         return answer;
     }
 
+    /**
+     * Request game start, once answer is not own ID, start game with requester(s)
+     * TODO redundant because 1v1 is enforced, could be used again to play with multiple players
+     */
     @MessageMapping("/requestStartGame")
     @SendTo("/game/play")
     public String playerRequestStartGame(String playerJSON) throws Exception {
@@ -57,6 +61,9 @@ public class GameController {
         return answer;
     }
 
+    /**
+     * Updates movement for all clients when socket gets new message.
+     */
     @MessageMapping("/movementUpdate")
     @SendTo("/game/play")
     public String movementUpdate(String playerJSON) throws Exception {
@@ -75,6 +82,10 @@ public class GameController {
         return answer;
     }
 
+    /**
+     * Checks if both players are ready.
+     * TODO implement, currently theres no check and the game just starts, causes desync of about 1 sec at start
+     */
     @MessageMapping("/game/start")
     @SendTo("/game/start")
     public String startGame(String playerJSON) throws Exception {
