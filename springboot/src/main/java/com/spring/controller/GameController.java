@@ -71,14 +71,21 @@ public class GameController {
         if(incomingJson.get("move").equals("left") || incomingJson.get("move").equals("right")) {
             System.out.println("movement update json: " + incomingJson);
         }
+        // note that here the incoming player cords is idCords, while otherCords are the coordinates of the sender's enemy
+        // TODO fix json
 
         String answer = "{\n" +
                 "  \"option\": \"" + "movementUpdate" + "\",\n" +
                 "  \"id\" : \"" + incomingJson.get("id") + "\",\n" +
                 "  \"name\" : \"" + incomingJson.get("name") + "\",\n" +
                 "  \"move\" : \"" + incomingJson.get("move") + "\",\n" +
-                "  \"jump\" : \"" + incomingJson.get("jump") + "\"\n" +
+                "  \"jump\" : \"" + incomingJson.get("jump") + "\",\n" +
+                "  \"idCordsX\" : \"" + incomingJson.get("playerCordsX") + "\",\n" +
+                "  \"idCordsY\" : \"" + incomingJson.get("playerCordsY") + "\",\n" +
+                "  \"otherCordsX\" : \"" + incomingJson.get("enemyCordsX") + "\",\n" +
+                "  \"otherCordsY\" : \"" + incomingJson.get("enemyCordsY") + "\"\n" +
                 "}";
+        System.out.println("movementAnswer:" + answer);
         return answer;
     }
 

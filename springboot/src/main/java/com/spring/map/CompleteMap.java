@@ -16,7 +16,7 @@ public class CompleteMap {
 
         FileReaderJson fileReaderJson = new FileReaderJson();
 
-        JsonObject jsonObject = gson.fromJson(fileReaderJson.readFromFile(  Map.PATH_TO_RESOURCE_FOLDER + "map\\mapTemplate.txt"), JsonObject.class);
+        JsonObject jsonObject = gson.fromJson(fileReaderJson.readFromFile(Map.PATH_TO_RESOURCE_FOLDER + "map\\mapTemplate.txt"), JsonObject.class);
         JsonArray jsonArray = new JsonArray();
         // Adds all middle platform data to json array, currently map size is 100 blocks, each part consists of 25 blocks, so 3 * 25 middle blocks + 25 beginning blocks = 100
         for (int numberOfRandomMapParts = 0; numberOfRandomMapParts < NUMBER_OF_MIDDLE_PARTS; numberOfRandomMapParts++) {
