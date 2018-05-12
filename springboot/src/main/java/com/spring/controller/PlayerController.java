@@ -3,7 +3,9 @@ package com.spring.controller;
 import com.google.gson.Gson;
 import com.spring.map.CompleteMap;
 import com.spring.player.Player;
+import com.spring.player.RegisteredUser;
 import com.spring.repository.PlayerService;
+import com.spring.repository.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,16 +17,22 @@ import java.util.List;
 public class PlayerController {
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private RegisteredUserService registeredUserService;
     private Gson gson = new Gson();
 
     @RequestMapping(value = "user/create", method = RequestMethod.POST)
     public void addPlayerInDatabase(@RequestBody String playerInJson) {
-        playerService.addPlayer(gson.fromJson(playerInJson, Player.class));
+        Player player = gson.fromJson(playerInJson, Player.class);
+        player.setRegisteredUser(registeredUserService.getRegisteredUser(player.getRegisteredUser().getUsername()));
+        playerService.addPlayer(player);
     }
 
     @RequestMapping(value = "user/update", method = RequestMethod.POST)
     public void updatePlayerInDatabase(@RequestBody String playerInJson) {
-        playerService.updatePlayer(gson.fromJson(playerInJson, Player.class));
+        Player player = gson.fromJson(playerInJson, Player.class);
+        player.setRegisteredUser(registeredUserService.getRegisteredUser(player.getRegisteredUser().getUsername()));
+        playerService.addPlayer(player);
 
     }
 
@@ -62,7 +70,7 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "user/getAllPlayers")
-    public List<Player> getAllPlayers() {
+    public List<RegisteredUser> getAllPlayers() {
         return playerService.getAllPlayers();
 
     }

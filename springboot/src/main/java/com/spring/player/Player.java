@@ -1,5 +1,6 @@
 package com.spring.player;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -20,6 +21,13 @@ public class Player {
     private String map;
     private String option;
     private String username;
+    private boolean gameEnded = false;
+
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL)
+    @JoinColumn(name = "RegisteredUser_id")
+
+    private RegisteredUser registeredUser;
 
     public String getUsername() {
         return username;
@@ -99,6 +107,23 @@ public class Player {
         this.y = y;
         this.UID = UID;
     }
+
+    public boolean isGameEnded() {
+        return gameEnded;
+    }
+
+    public void setGameEnded(boolean gameEnded) {
+        this.gameEnded = gameEnded;
+    }
+
+    public RegisteredUser getRegisteredUser() {
+        return registeredUser;
+    }
+
+    public void setRegisteredUser(RegisteredUser registeredUser) {
+        this.registeredUser = registeredUser;
+    }
+
     public Player() {
 
     }

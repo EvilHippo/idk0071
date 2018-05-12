@@ -1,6 +1,7 @@
 package com.spring.repository;
 
 import com.spring.player.Player;
+import com.spring.player.RegisteredUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,10 +59,11 @@ public class PlayerService {
         }
     }
 
-    public List<Player> getAllPlayers() {
-        List<Player> players = new ArrayList<>();
+    public List<RegisteredUser> getAllPlayers() {
+        List<RegisteredUser> players = new ArrayList<>();
         for (Player player : playerRepository.findAll()) {
-            players.add(player);
+            System.out.println(player.getRegisteredUser());
+            players.add(player.getRegisteredUser());
 
         }
         return players;
