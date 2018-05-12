@@ -70,4 +70,5 @@ public class RegisteredUserController {
     public RegisteredUser getPlayerInDatabase(@RequestBody String playerInJson) {
         return registeredUserService.getRegisteredUser(gson.fromJson(playerInJson, RegisteredUser.class).getUsername());
     }
+
 }

@@ -1,15 +1,13 @@
 package com.spring.repository;
 
+import com.spring.player.Leaderboard;
 import com.spring.player.Player;
 import com.spring.player.RegisteredUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PlayerService {
@@ -86,5 +84,44 @@ public class PlayerService {
     }
     public String getOpponentMap(long UID) {
         return getPlayer(getPlayer(UID).getOpponentUID()).getMap();
+    }
+
+
+    /**
+     * Will set game as finished and update the score in the database, needs both players score and UID
+     * @param firstPlayerUID first player's UID
+     * @param secondPlayerUID second player's UID
+     * @param firstPlayerScore first player's Score
+     * @param secondPlayerScore second player's score
+     */
+    public void finishGame(long firstPlayerUID, long secondPlayerUID, double firstPlayerScore, double secondPlayerScore) {
+        Player firstPlayer = getPlayer(firstPlayerUID);
+        Player secondPlayer = getPlayer(secondPlayerUID);
+        firstPlayer.setGameEnded(true);
+        secondPlayer.setGameEnded(true);
+        firstPlayer.setScore(firstPlayerScore);
+        secondPlayer.setScore(secondPlayerScore);
+        updatePlayer(firstPlayer);
+        updatePlayer(secondPlayer);
+    }
+
+    public Leaderboard getLeaderboardOfBestPlayers() {
+        Leaderboard leaderboard = new Leaderboard();
+        for (Player player : playerRepository.findAll()) {
+            if(player.isGameEnded()&& player.getRegisteredUser() != null)
+            leaderboard.addPlayerToLeaderboardAsSimplePlayer(player);
+        }
+        return leaderboard;
+    }
+
+    public Leaderboard getPersonalGameHistoryOfPlayer(String registeredUserUserName) {
+        Leaderboard leaderboard = new Leaderboard();
+        for (Player player : playerRepository.findAll()) {
+            if(player.isGameEnded() && player.getRegisteredUser() != null && player.getRegisteredUser().getUsername().equals(registeredUserUserName)) {
+                leaderboard.addPlayerToLeaderboardAsSimplePlayer(player);
+            }
+        }
+        return leaderboard;
+
     }
 }

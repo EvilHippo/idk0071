@@ -2,8 +2,10 @@ package com.spring.controller;
 
 import com.google.gson.Gson;
 import com.spring.map.CompleteMap;
+import com.spring.player.Leaderboard;
 import com.spring.player.Player;
 import com.spring.player.RegisteredUser;
+import com.spring.player.SimplifiedPlayerForLeaderboard;
 import com.spring.repository.PlayerService;
 import com.spring.repository.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,12 @@ public class PlayerController {
     @RequestMapping(value = "user/create", method = RequestMethod.POST)
     public void addPlayerInDatabase(@RequestBody String playerInJson) {
         Player player = gson.fromJson(playerInJson, Player.class);
-        player.setRegisteredUser(registeredUserService.getRegisteredUser(player.getRegisteredUser().getUsername()));
+        try {
+            player.setRegisteredUser(registeredUserService.getRegisteredUser(player.getRegisteredUser().getUsername()));
+        } catch (NullPointerException e) {
+
+        }
+        System.out.println(playerService);
         playerService.addPlayer(player);
     }
 
@@ -75,5 +82,17 @@ public class PlayerController {
 
     }
 
+    @RequestMapping(value = "leaderboard")
+    public List<SimplifiedPlayerForLeaderboard> getLeaderboard() {
+        Leaderboard leaderboard = playerService.getLeaderboardOfBestPlayers();
+        leaderboard.sort();
+        return leaderboard.getTopNumberOfPlayers(10);
+
+    }
+    @RequestMapping(value = "personalHistory", method = RequestMethod.POST)
+    public List<SimplifiedPlayerForLeaderboard> getRegisteredPlayerPersonalGameHistory(@RequestBody String RegisteredPlayerInJson) {
+        return playerService.getPersonalGameHistoryOfPlayer(gson.fromJson(RegisteredPlayerInJson, RegisteredUser.class).getUsername()).getSimplePlayers();
+
+    }
 
 }

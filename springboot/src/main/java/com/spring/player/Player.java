@@ -11,8 +11,7 @@ public class Player {
 
     @Id
     private long UID;
-    private double x;
-    private double y;
+
     private long opponentUID = 0;
     private String movement;
     private boolean ready = false;
@@ -28,6 +27,15 @@ public class Player {
     @JoinColumn(name = "RegisteredUser_id")
 
     private RegisteredUser registeredUser;
+    private double score = 0;
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
 
     public String getUsername() {
         return username;
@@ -77,21 +85,6 @@ public class Player {
         this.UID = UID;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
 
     public String getOption() {
         return option;
@@ -101,10 +94,9 @@ public class Player {
         this.option = option;
     }
 
-    public Player(double x, double y, long UID) {
+    public Player(long UID) {
 
-        this.x = x;
-        this.y = y;
+
         this.UID = UID;
     }
 
