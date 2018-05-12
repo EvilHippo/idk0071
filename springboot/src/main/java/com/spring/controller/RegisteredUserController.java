@@ -21,10 +21,14 @@ public class RegisteredUserController {
     public String addPlayerInDatabase(@RequestBody String playerInJson) {
         try {
             registeredUserService.addRegisteredUser(gson.fromJson(playerInJson, RegisteredUser.class));
-            return "{   'success': true }";
+            return "{\n" +
+                    "  \"success\": true\n" +
+                    "}";
         } catch (UserExists e) {
             e.printStackTrace();
-            return "{   'success': false }";
+            return "{\n" +
+                    "  \"success\": false\n" +
+                    "}";
         }
     }
     @RequestMapping(value = "login", method = RequestMethod.POST)
@@ -32,9 +36,13 @@ public class RegisteredUserController {
 
         RegisteredUser registeredUser = gson.fromJson(playerInJson, RegisteredUser.class);
         if(registeredUserService.getRegisteredUser(registeredUser.getUsername()).getPassword().equals(registeredUser.getPassword())) {
-            return "{   'success': true }";
+            return "{\n" +
+                    "  \"success\": true\n" +
+                    "}";
         } else {
-            return "{   'success': false }";
+            return "{\n" +
+                    "  \"success\": false\n" +
+                    "}";
         }
 
 
