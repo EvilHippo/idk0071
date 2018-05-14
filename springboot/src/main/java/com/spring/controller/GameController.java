@@ -45,8 +45,25 @@ public class GameController {
     }
 
     /**
+     * A timer has reached 0, game ends.
+     */
+    @MessageMapping("/notifyEnd")
+    @SendTo("/game/play")
+    public String gameEndNotification(String playerJSON) throws Exception {
+        JSONObject incomingJson = new JSONObject(playerJSON);
+        playerService.finishGame(Long.valueOf(String.valueOf(incomingJson.get("player1"))), Long.valueOf(String.valueOf(incomingJson.get("player2"))), Double.valueOf(String.valueOf(incomingJson.get("p1score"))), Double.valueOf(String.valueOf(incomingJson.get("p2score"))));
+        System.out.println("notifyEnd" + incomingJson);
+        String answer = "{\n" +
+                "  \"option\": \"" + "notifyEnd" + "\",\n" +
+                "  \"id\" : \"" + incomingJson.get("player1") + "\",\n" +
+                "  \"player1Score\" : \"" + incomingJson.get("p1score") + "\",\n" +
+                "  \"player2Score\" : \"" + incomingJson.get("p2score") + "\"\n" +
+                "}";
+        return answer;
+    }
+
+    /**
      * Request game start, once answer is not own ID, start game with requester(s)
-     * TODO redundant because 1v1 is enforced, could be used again to play with multiple players
      */
     @MessageMapping("/requestStartGame")
     @SendTo("/game/play")
@@ -72,7 +89,6 @@ public class GameController {
             System.out.println("movement update json: " + incomingJson);
         }
         // note that here the incoming player cords is idCords, while otherCords are the coordinates of the sender's enemy
-        // TODO fix json
 
         String answer = "{\n" +
                 "  \"option\": \"" + "movementUpdate" + "\",\n" +
@@ -85,13 +101,29 @@ public class GameController {
                 "  \"otherCordsX\" : \"" + incomingJson.get("enemyCordsX") + "\",\n" +
                 "  \"otherCordsY\" : \"" + incomingJson.get("enemyCordsY") + "\"\n" +
                 "}";
-        System.out.println("movementAnswer:" + answer);
+        // System.out.println("movementAnswer:" + answer);
+        return answer;
+    }
+
+    /**
+     * Request game start, game only starts once both players recieve msg that other is ready
+     */
+    @MessageMapping("/gameStartSignal")
+    @SendTo("/game/play")
+    public String playerSendStartSignal(String playerJSON) throws Exception {
+        JSONObject incomingJson = new JSONObject(playerJSON);
+        System.out.println("trololololololol");
+
+        String answer = "{\n" +
+                "  \"option\" : \"" + "signal" + "\",\n" +
+                "  \"id\" : \"" + incomingJson.get("id") + "\",\n" +
+                "  \"name\" : \"" + incomingJson.get("name") + "\"\n" +
+                "}";
         return answer;
     }
 
     /**
      * Checks if both players are ready.
-     * TODO implement, currently theres no check and the game just starts, causes desync of about 1 sec at start
      */
     @MessageMapping("/game/start")
     @SendTo("/game/start")
