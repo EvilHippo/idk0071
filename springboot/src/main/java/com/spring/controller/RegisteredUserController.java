@@ -35,7 +35,7 @@ public class RegisteredUserController {
     public String checkIfPlayerCanLogin(@RequestBody String playerInJson) {
 
         RegisteredUser registeredUser = gson.fromJson(playerInJson, RegisteredUser.class);
-        if(registeredUserService.getRegisteredUser(registeredUser.getUsername()).getPassword().equals(registeredUser.getPassword())) {
+        if(registeredUserService.getRegisteredUser(registeredUser.getUsername()) != null && registeredUserService.getRegisteredUser(registeredUser.getUsername()).getPassword().equals(registeredUser.getPassword())) {
             return "{\n" +
                     "  \"success\": true\n" +
                     "}";
