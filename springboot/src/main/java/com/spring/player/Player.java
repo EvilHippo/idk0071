@@ -25,7 +25,7 @@ public class Player {
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL)
     @JoinColumn(name = "RegisteredUser_id")
-
+    @JsonIgnore
     private RegisteredUser registeredUser;
     private double score = 0;
 
