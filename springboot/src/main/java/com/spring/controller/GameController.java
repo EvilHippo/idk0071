@@ -112,7 +112,6 @@ public class GameController {
     @SendTo("/game/play")
     public String playerSendStartSignal(String playerJSON) throws Exception {
         JSONObject incomingJson = new JSONObject(playerJSON);
-        System.out.println("trololololololol");
 
         String answer = "{\n" +
                 "  \"option\" : \"" + "signal" + "\",\n" +
@@ -139,6 +138,5 @@ public class GameController {
         } else {
             return "{ \"game started\": false }";
         }
-
     }
 }
