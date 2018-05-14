@@ -58,7 +58,7 @@ public class PlayerController {
     public List<Player> getPlayerToPlay(@RequestBody String playerInJson) {
         System.out.println("glory");
         System.out.println("cake:" + playerInJson);
-        /*
+
         if (playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).isPresent()) {
             Player player1 = playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get().get(0);
             Player player2 = playerService.getPlayersToPlay(gson.fromJson(playerInJson, Player.class).getUID()).get().get(1);
@@ -72,11 +72,13 @@ public class PlayerController {
                 playerService.updatePlayer(player1);
                 playerService.updatePlayer(player2);
             }
+            System.out.println(player1);
+            System.out.println(player2);
             return Arrays.asList(player1, player2);
         }
         return Arrays.asList(new Player(), new Player());
-    */
-        return Arrays.asList(new Player(), new Player());
+
+
     }
 
     @RequestMapping(value = "user/getAllPlayers")
