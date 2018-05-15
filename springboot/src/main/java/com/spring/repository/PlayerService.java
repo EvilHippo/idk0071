@@ -52,7 +52,7 @@ public class PlayerService {
                 return Optional.empty();
             }
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            //This means someone is searching for a match that does not exist.
             return Optional.empty();
         }
     }
